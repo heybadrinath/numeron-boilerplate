@@ -1,28 +1,39 @@
 // Iteration 2: Generate 2 random number and display it on the screen
+window.addEventListener("load",timerDisplay);
+
 var arr;
-function getRandomNumbers() {
-     let n1 = Math.floor(Math.random() * 100)
-    let n2 = Math.floor(Math.random() * 100)
-    arr = [n1,n2]
-    return arr;
-  }
-
-function displayRandomNumbers(){
-    var numbers = getRandomNumbers();
-    document.getElementById("number1").textContentL=numbers[0];
-    document.getElementById("number2").textContentL=numbers[1];
+var number1 = document.getElementById("number1");
+var number2 = document.getElementById("number2");
+var score = 0;
+var timerValue = document.getElementById("timer");
+var timerCount = 5;
+function random(){
+    var x = Math.ceil(Math.random()*100)
+    return x
 }
-
-
+function generateRandomNumbers(){
+    let r1 = 0
+    let r2 = 0
+    r1 = random()
+    r2 = random()
+    arr = [r1,r2]
+    console.log(arr)
+    return [r1,r2]
+}
+function inseringRandomNumbers(){
+    var k = generateRandomNumbers()
+    number1.textContent = k[0]
+    number2.textContent = k[1]
+}
 // Iteration 3: Make the options button functional
 const greaterThan = document.getElementById("greater-than")
 const equalTo = document.getElementById("equal-to")
 const lessThan = document.getElementById("lesser-than")
 var flag;
 function checkFlag(){
-    
-    var num1 =arr[0]
-    var num2 =arr[1]
+    a = arr
+    num1 = a[0]
+    num2 = a[1]
     if(num1>num2){
         flag=1;
     }else if(num1==num2){
@@ -30,32 +41,49 @@ function checkFlag(){
     }else if(num1<num2){
         flag = 3;
     }
+    // console.log(flag)
+    return flag;
 }
 
-greaterThan.addEventListener(('click'),()=>{
-    checkFlag()
-    if(flag==1){
-        displayRandomNumbers()
-    }else{
-        window.location.href='gameover.html'
-    }
-})
-equalTo.addEventListener(('click'),()=>{
-    checkFlag()
 
-    if(flag==2){
-        displayRandomNumbers()
-    }else{
-        window.location.href='gameover.html'
+function checkFlagAndClickedValue(buttonValue){
+    check = checkFlag()
+    if (flag === buttonValue) {
+        score+=1
+        inseringRandomNumbers();
+    } else {
+        window.location.href = "./gameover.html"
+        // console.log("HI")
+    };
     }
-})
-lessThan.addEventListener(('click'),()=>{
-    checkFlag()
+greaterThan.onclick = ()=>{
+    timerCount = 5
+    checkFlagAndClickedValue(1);
+    //passing button value into the function to check
+}
+equalTo.onclick = ()=>{
+    timerCount = 5
+    checkFlagAndClickedValue(2)
+}
+lessThan.onclick = () =>{
+    timerCount = 5
+    checkFlagAndClickedValue(3)
+};
 
-    if(flag==3){
-        displayRandomNumbers()
-    }else{
-        window.location.href='gameover.html'
-    }
-})
+window.addEventListener("load",inseringRandomNumbers())
+
+
 // Iteration 4: Build a timer for the game
+
+function timerDisplay() {
+    const interval = setInterval(() => {
+        if (timerCount >= 0) {
+            timerValue.textContent = timerCount; 
+            console.log(timerCount);
+            timerCount--;
+        } else {
+            clearInterval(interval);
+            window.location.href = "./gameover.html";
+        }
+    }, 1000);
+}
