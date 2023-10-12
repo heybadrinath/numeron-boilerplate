@@ -52,6 +52,7 @@ function checkFlagAndClickedValue(buttonValue){
         score+=1
         inseringRandomNumbers();
     } else {
+        window.localStorage.setItem('scoreFinal',score)
         window.location.href = "./gameover.html"
         // console.log("HI")
     };
@@ -82,7 +83,10 @@ function timerDisplay() {
             console.log(timerCount);
             timerCount--;
         } else {
+            window.localStorage.setItem('scoreFinal',score)
             window.location.href = "./gameover.html";
         }
     }, 1000);
 }
+
+

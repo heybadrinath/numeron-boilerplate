@@ -4,14 +4,8 @@ document.getElementById("play-again-button").addEventListener(('click'),()=>{
 })
 
 const scoreBox = document.getElementById("score-box")
-let currentScore = 0;
-
-
-
-
-
-
 
 window.addEventListener("load",()=>{
-    scoreBox.textContent = "Score: "+currentScore;
+    let currentScore= window.localStorage.getItem("scoreFinal");
+    scoreBox.textContent = "Score: " + currentScore;
 })
