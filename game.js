@@ -76,13 +76,12 @@ window.addEventListener("load",inseringRandomNumbers())
 // Iteration 4: Build a timer for the game
 
 function timerDisplay() {
-    const interval = setInterval(() => {
+    return setInterval(() => {
         if (timerCount >= 0) {
             timerValue.textContent = timerCount; 
             console.log(timerCount);
             timerCount--;
         } else {
-            clearInterval(interval);
             window.location.href = "./gameover.html";
         }
     }, 1000);
